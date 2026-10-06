@@ -7,23 +7,25 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Enums.Alliance;
 import org.firstinspires.ftc.teamcode.Enums.ShooterStates;
 import org.firstinspires.ftc.teamcode.Systems.Robot;
-import static org.firstinspires.ftc.teamcode.Util.COEFFICIENTS.*;
+import org.firstinspires.ftc.teamcode.Util.NECTAR_SHOOTER_COEFFICIENTS;
+import org.firstinspires.ftc.teamcode.Util.POLLEN_SHOOTER_COEFFICIENTS;
+
 import static org.firstinspires.ftc.teamcode.Util.Globals.*;
 
 public class ShooterSystem {
 
     PIDFController pollenController = new PIDFController(
-            PollenShooter.kp,
-            PollenShooter.ki,
-            PollenShooter.kd,
-            PollenShooter.kf
+            POLLEN_SHOOTER_COEFFICIENTS.kp,
+            POLLEN_SHOOTER_COEFFICIENTS.ki,
+            POLLEN_SHOOTER_COEFFICIENTS.kd,
+            POLLEN_SHOOTER_COEFFICIENTS.kf
     );
 
     PIDFController nectarController = new PIDFController(
-            NectarShooter.kp,
-            NectarShooter.ki,
-            NectarShooter.kd,
-            NectarShooter.kf
+            NECTAR_SHOOTER_COEFFICIENTS.kp,
+            NECTAR_SHOOTER_COEFFICIENTS.ki,
+            NECTAR_SHOOTER_COEFFICIENTS.kd,
+            NECTAR_SHOOTER_COEFFICIENTS.kf
     );
 
     public static ShooterStates PS, CS = ShooterStates.INIT;
@@ -37,15 +39,15 @@ public class ShooterSystem {
 
     public void update(Robot robot) {
 
-        pollenController.setP(PollenShooter.kp);
-        pollenController.setI(PollenShooter.ki);
-        pollenController.setD(PollenShooter.kd);
-        pollenController.setF(PollenShooter.kf);
+        pollenController.setP(POLLEN_SHOOTER_COEFFICIENTS.kp);
+        pollenController.setI(POLLEN_SHOOTER_COEFFICIENTS.ki);
+        pollenController.setD(POLLEN_SHOOTER_COEFFICIENTS.kd);
+        pollenController.setF(POLLEN_SHOOTER_COEFFICIENTS.kf);
 
-        nectarController.setP(NectarShooter.kp);
-        nectarController.setI(NectarShooter.ki);
-        nectarController.setD(NectarShooter.kd);
-        nectarController.setF(NectarShooter.kf);
+        nectarController.setP(NECTAR_SHOOTER_COEFFICIENTS.kp);
+        nectarController.setI(NECTAR_SHOOTER_COEFFICIENTS.ki);
+        nectarController.setD(NECTAR_SHOOTER_COEFFICIENTS.kd);
+        nectarController.setF(NECTAR_SHOOTER_COEFFICIENTS.kf);
 
         double distance = calculateHiveDistance(robot.getFollower().pose(), Alliance.RED);
 

@@ -1,13 +1,11 @@
 package org.firstinspires.ftc.teamcode.Systems.Subsystems;
 
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Enums.HoodStates;
-import org.firstinspires.ftc.teamcode.Enums.IntakeStates;
 import org.firstinspires.ftc.teamcode.Systems.Robot;
-import org.firstinspires.ftc.teamcode.Util.COEFFICIENTS;
-import org.firstinspires.ftc.teamcode.Util.Globals;
+import org.firstinspires.ftc.teamcode.Util.NECTAR_SHOOTER_COEFFICIENTS;
+import org.firstinspires.ftc.teamcode.Util.POLLEN_SHOOTER_COEFFICIENTS;
 
 public class HoodSystem {
 
@@ -19,12 +17,12 @@ public class HoodSystem {
         PS = HoodStates.INIT;
         time.reset();
     }
-    public void update(Robot robot, Gamepad gamepad) {
+    public void update(Robot robot) {
         switch (CS) {
             case INIT:
             case IDLE:
-                robot.getPollenHood().setPosition(COEFFICIENTS.PollenShooter.HOOD_MIN);
-                robot.getNectarHood().setPosition(COEFFICIENTS.NectarShooter.HOOD_MIN);
+                robot.getPollenHood().setPosition(POLLEN_SHOOTER_COEFFICIENTS.HOOD_MIN);
+                robot.getNectarHood().setPosition(NECTAR_SHOOTER_COEFFICIENTS.HOOD_MIN);
                 break;
             case SHOOTING:
 
