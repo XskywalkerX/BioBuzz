@@ -12,6 +12,8 @@ public class COEFFICIENTS {
         public static double kd = 0.0001;
         public static double kf = 0.000433;
         public static double targetVelocity = 1550.0;
+        public static double HOOD_MAX = 1.0;
+        public static double HOOD_MIN = 0.0;
     }
 
     @Configurable
@@ -21,5 +23,7 @@ public class COEFFICIENTS {
         public static double kd = 0.0001;
         public static double kf = 0.000692;
         public static double targetVelocity = 1300.0;
+        public static double HOOD_MAX = 1.0;
+        public static double HOOD_MIN = 0.0;
     }
 }
