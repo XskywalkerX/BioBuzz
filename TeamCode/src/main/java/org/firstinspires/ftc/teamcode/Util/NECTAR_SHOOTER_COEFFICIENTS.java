@@ -11,4 +11,12 @@ public class NECTAR_SHOOTER_COEFFICIENTS {
     public static double targetVelocity = 1300.0;
     public static double HOOD_MAX = 1.0;
     public static double HOOD_MIN = 0.0;
+    public static double A = 0;
+    public static double B = 0;
+    public static double C = 0;
+    public static double D = 0;
+    public static double E = 0;
+    public static double F = 0;
+    public static double G = 0;
+
 }
