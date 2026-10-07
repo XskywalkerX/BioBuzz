@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.Systems.Subsystems;
 
+import static org.firstinspires.ftc.teamcode.Util.POLLEN_SHOOTER_COEFFICIENTS.K;
+import static org.firstinspires.ftc.teamcode.Util.POLLEN_SHOOTER_COEFFICIENTS.targetVelocity;
+
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Enums.HoodStates;
@@ -26,13 +29,28 @@ public class HoodSystem {
                 robot.getNectarHood().setPosition(NECTAR_SHOOTER_COEFFICIENTS.HOOD_MIN);
                 break;
             case SHOOTING:
-                //calcular a distância em relação ao alvo calcular a posição de atirar posição de atirar quando pollen/nectar tocar a flywheel e diminuir o rpm
+                //quando pollen/nectar tocar a flywheel e diminuir o rpm
                 robot.getNectarHood().setPosition(getHoodAngleN(distance));
                 robot.getPollenHood().setPosition(getHoodAngleP(distance));
+                //beam break sensor
+                //calcular a diferença entre a velocidade alvo e a atual do shooter
+                double difference = POLLEN_SHOOTER_COEFFICIENTS.targetVelocity - robot.getPollenShooter().getVelocity();
+                //diferença ++ posição do servo --
+
+                //diferença -- posição do servo ++
+                //constante K = o quanto muda
+                //posição do servo = posição atual+(diferença * K);i4fmk
+                double servoPOS = velCompensation(getHoodAngleP(velCompensation());
+                double servoPOS = velCompensation()
+
 
                 break;
         }
         PS = CS;
+    }
+    public double velCompensation(double hoodAngle, double targetVel, double currentVel){
+        double diference = targetVel - currentVel;
+        return hoodAngle - (diference * K);
     }
 
     public double getHoodAngleN(double goalDistance) {
