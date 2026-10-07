@@ -1,8 +1,5 @@
 package org.firstinspires.ftc.teamcode.Systems.Subsystems;
 
-import static org.firstinspires.ftc.teamcode.Util.POLLEN_SHOOTER_COEFFICIENTS.K;
-import static org.firstinspires.ftc.teamcode.Util.POLLEN_SHOOTER_COEFFICIENTS.targetVelocity;
-
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Enums.HoodStates;
@@ -39,18 +36,31 @@ public class HoodSystem {
 
                 //diferença -- posição do servo ++
                 //constante K = o quanto muda
-                //posição do servo = posição atual+(diferença * K);i4fmk
-                double servoPOS = velCompensation(getHoodAngleP(velCompensation());
-                double servoPOS = velCompensation()
+                //posição do servo = posição atual+(diferença * K);
+                double pollenHoodPos = velCompensation(
+                        getHoodAngleP(distance),
+                        POLLEN_SHOOTER_COEFFICIENTS.targetVelocity,
+                        robot.getPollenShooter().getVelocity(),
+                        POLLEN_SHOOTER_COEFFICIENTS.K
+                        );
 
+                double nectarHoodPos = velCompensation(
+                        getHoodAngleN(distance),
+                        NECTAR_SHOOTER_COEFFICIENTS.targetVelocity,
+                        robot.getNectarShooter().getVelocity(),
+                        NECTAR_SHOOTER_COEFFICIENTS.K
+                );
+
+                robot.getPollenHood().setPosition(pollenHoodPos);
+                robot.getNectarHood().setPosition(nectarHoodPos);
 
                 break;
         }
         PS = CS;
     }
-    public double velCompensation(double hoodAngle, double targetVel, double currentVel){
+    public double velCompensation(double hoodAngle, double targetVel, double currentVel, double hoodK){
         double diference = targetVel - currentVel;
-        return hoodAngle - (diference * K);
+        return hoodAngle - (diference * hoodK);
     }
 
     public double getHoodAngleN(double goalDistance) {
