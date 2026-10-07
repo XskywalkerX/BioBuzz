@@ -63,4 +63,11 @@ public class ShooterSystem {
     public void setShooterState(ShooterStates state) {
         CS = state;
     }
+
+    public ShooterStates getState() {
+        return CS;
+    }
+    public ShooterStates getPrevState() {
+        return PS;
+    }
 }
