@@ -4,6 +4,8 @@ import com.bylazar.configurables.annotations.Configurable;
 
 @Configurable
 public class POLLEN_SHOOTER_COEFFICIENTS {
+
+    public static double K = 0.005; //hood constant
     public static double kp = 0.00010;
     public static double ki = 0.00005;
     public static double kd = 0.0001;
