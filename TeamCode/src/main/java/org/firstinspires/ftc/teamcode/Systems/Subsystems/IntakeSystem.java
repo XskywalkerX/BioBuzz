@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Systems.Robot;
 import org.firstinspires.ftc.teamcode.Util.Globals;
 
 public class IntakeSystem {
-    public static IntakeStates PS, CS = IntakeStates.INIT;
+    public IntakeStates PS, CS;
     ElapsedTime time = new ElapsedTime();
     public IntakeSystem() {
         CS = IntakeStates.INIT;
