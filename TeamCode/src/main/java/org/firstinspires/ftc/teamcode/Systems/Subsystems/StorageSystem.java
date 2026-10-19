@@ -16,18 +16,16 @@ public class StorageSystem {
             IntakeSystem intake) {
 
         if(robot.getBB().getState()) {
-            if(intake.getState() == IntakeStates.CATCHING) {
-                count++;
-                if(full()) {
-                    intake.setIntakeState(IntakeStates.IDLE);
-                } else if(overflow()) {
-                    intake.setIntakeState(IntakeStates.EJECTING);
+            if(intake.getState() == IntakeStates.DRIVER) {
+                if(robot.getIntake().getPower() > 0) {
+                    count++;
+                } else if(robot.getIntake().getPower() < 0) {
+                    count--;
                 }
             } else if(intake.getState() == IntakeStates.EJECTING) {
                 count--;
-                if(!full()) {
-                    intake.setIntakeState(IntakeStates.IDLE);
-                }
+            } else {
+                count++;
             }
         }
 
