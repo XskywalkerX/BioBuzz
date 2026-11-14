@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
+import org.firstinspires.ftc.teamcode.Enums.Alliance;
+import org.firstinspires.ftc.teamcode.Util.Globals;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 import java.util.HashMap;
@@ -88,5 +90,11 @@ public class Robot {
             telemetry.addData(servo.getValue() + "Pos: ", servo.getKey());
         }
         telemetry.update();
+    }
+
+    public double aim(Alliance alliance) {
+        double tX = alliance == Alliance.BLUE ? Globals.BLUE_HIVE_X : Globals.RED_HIVE_X;
+        double tY = alliance == Alliance.BLUE ? Globals.BLUE_HIVE_Y : Globals.RED_HIVE_Y;
+        return Math.atan2(tY - follower.pose().y(), tX - follower.pose().x());
     }
 }
