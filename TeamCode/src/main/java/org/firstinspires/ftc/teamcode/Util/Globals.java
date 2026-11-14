@@ -1,17 +1,32 @@
 package org.firstinspires.ftc.teamcode.Util;
 
+import com.bylazar.configurables.annotations.Configurable;
+
 import org.firstinspires.ftc.teamcode.Enums.Alliance;
 
+
+@Configurable
 public class Globals {
+
+    public static int TARGET_VEL = 1550;
     public static int INTAKE_DIRECTION = 1;
     public static double BLUE_HIVE_X = 0;
     public static double BLUE_HIVE_Y = 0;
     public static double RED_HIVE_X = 0;
     public static double RED_HIVE_Y = 0;
-    public static double POLLEN_HOOD_START = 0.0;
-    public static double NECTAR_HOOD_MIN_POSITION = 0.30;
-    public static double NECTAR_HOOD_START = NECTAR_HOOD_MIN_POSITION;
-    public static double MAX_HOOD_POSITION = 0.60;
+    public static double POLLEN_HOOD_MAX = 0.6;
+    public static double POLLEN_HOOD_MIN = 0;
+    public static double NECTAR_HOOD_MAX = 0.6;
+    public static double NECTAR_HOOD_MIN = 0.3;
+
+    public static double POLLEN_DOOR_MAX = 0.6;
+
+    public static double POLLEN_DOOR_MIN = -0.6;
+
+    public static double NECTAR_DOOR_MAX = 0;
+
+    public static double NECTAR_DOOR_MIN = -1;
+
 
     public static ShooterConfig POLLEN_SHOOTER = new ShooterConfig(
             null, -0.030, 0.001, 0.00001, 0, 0.75, 0.0, 0.005, 0, 0, 0, 0

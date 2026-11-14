@@ -40,7 +40,7 @@ public class ShooterConfig {
     }
 
     public double calculateTargetVelocity(double hive_distance) {
-        return 1550; // 1500
+        return Globals.TARGET_VEL; // 1500
     }
 
     public double calculateHiveDistance(Pose botPose, Alliance alliance) {

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Systems;
 
 import com.pedropathing.follower.Follower;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
@@ -42,6 +43,9 @@ public class Robot {
         pollenHood.setDirection(Servo.Direction.REVERSE);
 //        ll = hwMap.get(Limelight3A.class, "Limelight");
         follower = Constants.create(hwMap);
+
+        pollenShooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        nectarShooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         motor.put(pollenShooter, "Pollen Shooter");
         motor.put(nectarShooter, "Nectar Shooter");
