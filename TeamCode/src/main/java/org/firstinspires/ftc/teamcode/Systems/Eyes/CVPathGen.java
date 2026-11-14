@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode.Systems.Eyes;
+
 import com.pedropathing.api.Paths;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.math.Matrix;
@@ -11,16 +12,14 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Enums.Alliance;
 import org.firstinspires.ftc.teamcode.Util.Globals;
-
 import java.util.ArrayList;
+
 public class CVPathGen {
     private Limelight3A ll;
     private Follower follower;
     private boolean isRed;
     CVCostAlgo algo = new CVCostAlgo();
-
     Telemetry telemetry;
-
     public ArrayList<Pose> simBall = new ArrayList<>();
     public boolean simulation = false;
     public Pose simBotPose = new Pose(0,0,0);
@@ -40,14 +39,14 @@ public class CVPathGen {
 
         ll = hardwareMap.get(Limelight3A.class, "limelight"); //change to your name
         ll.start();
-        ll.pipelineSwitch(5); // change to your pipeline
+        ll.pipelineSwitch(1); // change to your pipeline
     }
     public CVPathGen(){
         this.isRed = Globals.alliance == Alliance.RED;
     }
     public ArrayList<Pose> getBalls(boolean sim){
         if(sim) return simBall;
-        ArrayList<double[]> relativeBalls = new ArrayList<>();
+        ArrayList<double[] > relativeBalls = new ArrayList<>();
         ArrayList<Pose> absoluteBalls = new ArrayList<>();
         LLResult result = ll.getLatestResult();
 

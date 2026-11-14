@@ -31,6 +31,12 @@ public class ShooterSystem {
     }
 
     public void update(Robot robot) {
+        if (config.shooter == null) return;
+
+        if (config.kp == 0 && config.ki == 0 && config.kd == 0 && config.kf == 0) {
+            config.kp = 0.001;
+            config.kf = 0.0005;
+        }
 
         controller.setP(config.kp);
         controller.setI(config.ki);
@@ -54,7 +60,7 @@ public class ShooterSystem {
                 config.shooter.setPower(0);
                 break;
             case SHOOTING:
-                config.shooter.setPower(output);
+                config.shooter.setPower(-output);
                 break;
         }
 

@@ -18,6 +18,8 @@ public class Robot {
 
     DcMotorEx intake, pollenShooter, nectarShooter;
     Servo pollenHood, nectarHood;
+    Servo portaPollen;
+    Servo portaNectar;
 
     public HashMap<DcMotorEx, String> motor = new HashMap<>();
     public HashMap<Servo, String> servo = new HashMap<>();
@@ -33,6 +35,8 @@ public class Robot {
         nectarShooter = hwMap.get(DcMotorEx.class, "shooterNectar");
         pollenHood = hwMap.get(Servo.class, "hoodPollen");
         nectarHood = hwMap.get(Servo.class, "hoodNectar");
+        portaPollen = hwMap.get(Servo.class, "portaPollen");
+        portaNectar = hwMap.get(Servo.class, "portaNectar");
 
         pollenShooter.setDirection(DcMotorSimple.Direction.REVERSE);
         pollenHood.setDirection(Servo.Direction.REVERSE);
@@ -45,6 +49,8 @@ public class Robot {
 
         servo.put(pollenHood, "Pollen Hood");
         servo.put(nectarHood, "Nectar Hood");
+        servo.put(portaPollen, "Pollen Stopper");
+        servo.put(portaNectar, "Nectar Stopper");
     }
 
 //    public void startLL() {
@@ -57,6 +63,8 @@ public class Robot {
     public DcMotorEx getNectarShooter(){return nectarShooter;}
     public Servo getPollenHood(){return pollenHood;}
     public Servo getNectarHood(){return nectarHood;}
+    public Servo getPortaPollen(){return portaPollen;}
+    public Servo getPortaNectar(){return portaNectar;}
     public DcMotorEx getPollenShooter(){return pollenShooter;}
 //    public Limelight3A getLimelight(){return ll;}
     public Follower getFollower(){return follower;}

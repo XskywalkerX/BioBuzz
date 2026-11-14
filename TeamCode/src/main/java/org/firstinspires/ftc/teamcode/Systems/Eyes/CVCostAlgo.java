@@ -90,11 +90,8 @@ public class CVCostAlgo {
             }else{
                 theta = Math.atan2(route.get(i).y() - route.get(i - 1).y(), route.get(i).x() - route.get(i - 1).x());
             }
-
-
             Vector2D botVec = Vector2D.polar(1, theta + Math.PI/2.0);
             double compx = botVec.dot(ballToBall);
-
             Vector2D botVecPerp = Vector2D.polar(1, theta);
             double compy = botVecPerp.dot(ballToBall);
             if(Math.abs(compx) < 10 && Math.abs(compy) < 6){

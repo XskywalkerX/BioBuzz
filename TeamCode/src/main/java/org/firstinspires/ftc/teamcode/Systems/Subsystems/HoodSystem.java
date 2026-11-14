@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.Systems.Subsystems;
 
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.teamcode.Enums.HoodStates;
 import org.firstinspires.ftc.teamcode.Enums.ShooterStates;
 import org.firstinspires.ftc.teamcode.Systems.Robot;

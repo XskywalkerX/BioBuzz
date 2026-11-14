@@ -4,10 +4,8 @@ import static org.firstinspires.ftc.teamcode.Util.Globals.BLUE_HIVE_X;
 import static org.firstinspires.ftc.teamcode.Util.Globals.BLUE_HIVE_Y;
 import static org.firstinspires.ftc.teamcode.Util.Globals.RED_HIVE_X;
 import static org.firstinspires.ftc.teamcode.Util.Globals.RED_HIVE_Y;
-
 import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-
 import org.firstinspires.ftc.teamcode.Enums.Alliance;
 
 public class ShooterConfig {
@@ -42,7 +40,7 @@ public class ShooterConfig {
     }
 
     public double calculateTargetVelocity(double hive_distance) {
-        return 1500;
+        return 1550; // 1500
     }
 
     public double calculateHiveDistance(Pose botPose, Alliance alliance) {
