@@ -44,8 +44,7 @@ public class ShooterSystem {
         controller.setF(config.kf);
 
         double distance = config.calculateHiveDistance(
-                robot.getFollower().pose(),
-                alliance
+                robot.getFollower().pose()
         );
 
         double output = controller.calculate(

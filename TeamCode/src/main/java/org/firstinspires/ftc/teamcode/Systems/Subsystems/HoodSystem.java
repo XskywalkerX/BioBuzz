@@ -37,8 +37,7 @@ public class HoodSystem {
             case SHOOTING:
                 if (shooterSystem.getState() == ShooterStates.SHOOTING) {
                     double distance = config.calculateHiveDistance(
-                            robot.getFollower().pose(),
-                            Globals.alliance
+                            robot.getFollower().pose()
                     );
 
                     double hoodAngle = calculateHoodAngle(

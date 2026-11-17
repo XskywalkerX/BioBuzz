@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Util;
 
 import static org.firstinspires.ftc.teamcode.Util.Globals.BLUE_HIVE_X;
 import static org.firstinspires.ftc.teamcode.Util.Globals.BLUE_HIVE_Y;
+import static org.firstinspires.ftc.teamcode.Util.Globals.POSE_HIVE;
 import static org.firstinspires.ftc.teamcode.Util.Globals.RED_HIVE_X;
 import static org.firstinspires.ftc.teamcode.Util.Globals.RED_HIVE_Y;
 import com.pedropathing.math.Pose;
@@ -43,10 +44,8 @@ public class ShooterConfig {
         return Globals.TARGET_VEL; // 1500
     }
 
-    public double calculateHiveDistance(Pose botPose, Alliance alliance) {
-        return alliance == Alliance.RED ?
-                Math.sqrt(Math.pow(botPose.x() - RED_HIVE_X, 2) + Math.pow(botPose.y() - RED_HIVE_Y, 2)) :
-                Math.sqrt(Math.pow(botPose.x() - BLUE_HIVE_X, 2) + Math.pow(botPose.y() - BLUE_HIVE_Y, 2));
+    public double calculateHiveDistance(Pose botPose) {
+        return Math.sqrt(Math.pow(botPose.x() - POSE_HIVE.x(), 2) + Math.pow(botPose.y() - POSE_HIVE.y(), 2));
     }
 
     public void setShooter(DcMotorEx shooter) {
