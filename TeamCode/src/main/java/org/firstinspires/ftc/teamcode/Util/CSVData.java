@@ -1,16 +1,12 @@
 package org.firstinspires.ftc.teamcode.Util;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
-import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,31 +14,41 @@ import java.util.Map;
 
 public class CSVData {
     private final File file;
+    private final Telemetry telemetry;
     private final List<String> headers = new ArrayList<>();
     private final Map<String, String> currentRow = new LinkedHashMap<>();
     private boolean headerChanged = false;
 
-    public CSVData(String filePath) {
+    public CSVData(String filePath, Telemetry telemetry) {
         this.file = new File(filePath);
+        this.telemetry = telemetry;
         createFile();
     }
 
     public void createFile() {
         try {
+            File parentDir = file.getParentFile();
+            if (parentDir != null && !parentDir.exists()) {
+                parentDir.mkdirs();
+            }
+
             if (!file.exists()) {
                 file.createNewFile();
             } else if (file.length() > 0) {
-                try (CSVReader reader = new CSVReader(new FileReader(file))) {
-                    String[] existingHeaders = reader.readNext();
-                    if (existingHeaders != null) {
-                        for (String h : existingHeaders) {
-                            headers.add(h);
-                        }
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String headerLine = reader.readLine();
+                reader.close();
+
+                if (headerLine != null && !headerLine.isEmpty()) {
+                    for (String h : headerLine.split(",")) {
+                        headers.add(h.replace("\"", "").trim());
                     }
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            if (telemetry != null) {
+                telemetry.addData("CSV Create Error", e.toString());
+            }
         }
     }
 
@@ -51,48 +57,73 @@ public class CSVData {
             headers.add(label);
             headerChanged = true;
         }
-        currentRow.put(label, String.valueOf(value));
+        currentRow.put(label, escapeCsv(String.valueOf(value)));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void nextRow() {
+        if (currentRow.isEmpty()) return;
+
         try {
             if (headerChanged) {
                 updateHeaderLine();
                 headerChanged = false;
             }
 
-            String[] rowArray = new String[headers.size()];
+            StringBuilder rowBuilder = new StringBuilder();
             for (int i = 0; i < headers.size(); i++) {
-                rowArray[i] = currentRow.getOrDefault(headers.get(i), "");
+                if (i > 0) rowBuilder.append(",");
+                String val = currentRow.get(headers.get(i));
+                rowBuilder.append(val != null ? val : "");
             }
 
-            try (CSVWriter writer = new CSVWriter(new FileWriter(file, true))) {
-                writer.writeNext(rowArray);
-            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+            writer.write(rowBuilder.toString());
+            writer.newLine();
+            writer.close();
 
             currentRow.clear();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            if (telemetry != null) {
+                telemetry.addData("CSV Write Error", e.toString());
+            }
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void updateHeaderLine() throws IOException {
-        List<String> lines = Files.readAllLines(file.toPath());
-
-        java.io.StringWriter sw = new java.io.StringWriter();
-        try (CSVWriter tempWriter = new CSVWriter(sw)) {
-            tempWriter.writeNext(headers.toArray(new String[0]));
+        List<String> lines = new ArrayList<>();
+        if (file.exists() && file.length() > 0) {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+            reader.close();
         }
-        String formattedHeader = sw.toString().trim();
+
+        StringBuilder headerBuilder = new StringBuilder();
+        for (int i = 0; i < headers.size(); i++) {
+            if (i > 0) headerBuilder.append(",");
+            headerBuilder.append(escapeCsv(headers.get(i)));
+        }
 
         if (lines.isEmpty()) {
-            lines.add(formattedHeader);
+            lines.add(headerBuilder.toString());
         } else {
-            lines.set(0, formattedHeader);
+            lines.set(0, headerBuilder.toString());
         }
-        Files.write(file.toPath(), lines);
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file, false));
+        for (String line : lines) {
+            writer.write(line);
+            writer.newLine();
+        }
+        writer.close();
+    }
+
+    private String escapeCsv(String val) {
+        if (val.contains(",") || val.contains("\"") || val.contains("\n")) {
+            return "\"" + val.replace("\"", "\"\"") + "\"";
+        }
+        return val;
     }
 }
