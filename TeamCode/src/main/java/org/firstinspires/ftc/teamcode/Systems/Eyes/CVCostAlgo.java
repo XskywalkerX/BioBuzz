@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.Systems.Eyes;
 
 import com.pedropathing.math.Pose;
 import com.pedropathing.math.Vector2D;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

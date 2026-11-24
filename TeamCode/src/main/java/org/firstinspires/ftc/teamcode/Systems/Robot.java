@@ -20,7 +20,6 @@ import java.util.Map;
 public class Robot {
 
     DcMotorEx intake, pollenShooter, nectarShooter;
-    Servo pollenHood, nectarHood;
     Servo portaPollen;
     Servo portaNectar;
 
@@ -36,13 +35,10 @@ public class Robot {
         intake = hwMap.get(DcMotorEx.class, "intake");
         pollenShooter = hwMap.get(DcMotorEx.class, "shooterPollen");
         nectarShooter = hwMap.get(DcMotorEx.class, "shooterNectar");
-        pollenHood = hwMap.get(Servo.class, "hoodPollen");
-        nectarHood = hwMap.get(Servo.class, "hoodNectar");
         portaPollen = hwMap.get(Servo.class, "portaPollen");
         portaNectar = hwMap.get(Servo.class, "portaNectar");
 
         pollenShooter.setDirection(DcMotorSimple.Direction.REVERSE);
-        pollenHood.setDirection(Servo.Direction.REVERSE);
 //        ll = hwMap.get(Limelight3A.class, "Limelight");
         follower = Constants.create(hwMap);
 
@@ -53,8 +49,6 @@ public class Robot {
         motor.put(nectarShooter, "Nectar Shooter");
         motor.put(intake, "Intake");
 
-        servo.put(pollenHood, "Pollen Hood");
-        servo.put(nectarHood, "Nectar Hood");
         servo.put(portaPollen, "Pollen Stopper");
         servo.put(portaNectar, "Nectar Stopper");
     }
@@ -67,8 +61,6 @@ public class Robot {
 
     public DcMotorEx getIntake(){return intake;}
     public DcMotorEx getNectarShooter(){return nectarShooter;}
-    public Servo getPollenHood(){return pollenHood;}
-    public Servo getNectarHood(){return nectarHood;}
     public Servo getPortaPollen(){return portaPollen;}
     public Servo getPortaNectar(){return portaNectar;}
     public DcMotorEx getPollenShooter(){return pollenShooter;}

@@ -5,15 +5,21 @@ import static org.firstinspires.ftc.teamcode.Util.Globals.BLUE_HIVE_Y;
 import static org.firstinspires.ftc.teamcode.Util.Globals.POSE_HIVE;
 import static org.firstinspires.ftc.teamcode.Util.Globals.RED_HIVE_X;
 import static org.firstinspires.ftc.teamcode.Util.Globals.RED_HIVE_Y;
+
+import com.pedropathing.follower.Follower;
 import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import org.firstinspires.ftc.teamcode.Enums.Alliance;
 
 public class ShooterConfig {
+    Follower follower;
+    Pose robotPose;
     public double kp,ki,kd,kf,hMax,hMin,hK,a,b,c,d;
     public DcMotorEx shooter;
+
     public ShooterConfig(
             DcMotorEx shooter,
+
             double kp,
             double ki,
             double kd,
@@ -51,4 +57,5 @@ public class ShooterConfig {
     public void setShooter(DcMotorEx shooter) {
         this.shooter = shooter;
     }
+
 }
