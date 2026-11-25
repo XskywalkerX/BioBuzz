@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.DigitalChannel;
 
 @TeleOp(name = "Beam Breaker Test", group = "test")
 public class BeamBreakerTest extends OpMode {
-    // This must match the sensor name in the Robot Controller configuration.
     private DigitalChannel beamBreaker;
     private boolean previousBeamBroken;
     private int ballsDetected;
@@ -15,7 +14,6 @@ public class BeamBreakerTest extends OpMode {
     public void init() {
         beamBreaker = hardwareMap.get(DigitalChannel.class, "BeamBreaker");
         beamBreaker.setMode(DigitalChannel.Mode.INPUT);
-
         telemetry.addLine("Beam breaker ready");
         telemetry.addLine("Move a ball through the sensor to test it.");
         telemetry.update();
@@ -26,7 +24,6 @@ public class BeamBreakerTest extends OpMode {
         // Typical break-beam sensors are LOW while blocked. If yours reads
         // BLOCKED while clear, remove the ! below to invert the interpretation.
         boolean beamBroken = !beamBreaker.getState();
-
         // Count once when the ball first blocks the beam, not on every loop.
         if (beamBroken && !previousBeamBroken) {
             ballsDetected++;
