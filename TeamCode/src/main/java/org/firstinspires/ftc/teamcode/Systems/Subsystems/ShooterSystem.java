@@ -5,26 +5,27 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Enums.ShooterStates;
 import org.firstinspires.ftc.teamcode.Systems.Robot;
+import org.firstinspires.ftc.teamcode.Util.FlyWheelController;
 import org.firstinspires.ftc.teamcode.Util.ShooterConfig;
 
 import static org.firstinspires.ftc.teamcode.Util.Globals.*;
 
 public class ShooterSystem {
-
     public ShooterStates PS, CS;
     ElapsedTime time = new ElapsedTime();
-    private final ShooterConfig config;
-    PIDFController controller;
+    private ShooterConfig config;
+    FlyWheelController controller;
 
     public ShooterSystem(ShooterConfig config) {
         CS = ShooterStates.INIT;
         PS = ShooterStates.INIT;
         this.config = config;
-        controller = new PIDFController(
-                config.kp,
-                config.ki,
-                config.kd,
-                config.kf
+
+        controller = new FlyWheelController(
+                config.kV,
+                config.kA,
+                config.kStatic,
+                config.kP
         );
 
         time.reset();
@@ -33,23 +34,19 @@ public class ShooterSystem {
     public void update(Robot robot) {
         if (config.shooter == null) return;
 
-        if (config.kp == 0 && config.ki == 0 && config.kd == 0 && config.kf == 0) {
-            config.kp = 0.001;
-            config.kf = 0.0005;
-        }
-
-        controller.setP(config.kp);
-        controller.setI(config.ki);
-        controller.setD(config.kd);
-        controller.setF(config.kf);
+        controller.setV(config.kV);
+        controller.setA(config.kA);
+        controller.setS(config.kStatic);
+        controller.setP(config.kP);
 
         double distance = config.calculateHiveDistance(
                 robot.getFollower().pose()
         );
 
+        controller.setTargetVel(config.calculateTargetVelocity(distance));
+
         double output = controller.calculate(
-                config.shooter.getVelocity(),
-                config.calculateTargetVelocity(distance)
+                config.shooter.getVelocity()
         );
 
         switch (CS) {
@@ -67,6 +64,10 @@ public class ShooterSystem {
     }
     public void setShooterState(ShooterStates state) {
         CS = state;
+    }
+
+    public void setShooterConfig(ShooterConfig config){
+        this.config = config;
     }
 
     public ShooterStates getState() {

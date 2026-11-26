@@ -14,31 +14,25 @@ import org.firstinspires.ftc.teamcode.Enums.Alliance;
 public class ShooterConfig {
     Follower follower;
     Pose robotPose;
-    public double kp,ki,kd,kf,hMax,hMin,hK,a,b,c,d;
+    public double kV,kA,kStatic,kP,a,b,c,d;
     public DcMotorEx shooter;
 
     public ShooterConfig(
             DcMotorEx shooter,
 
-            double kp,
-            double ki,
-            double kd,
-            double kf,
-            double hMax,
-            double hMin,
-            double hK,
+            double kV,
+            double kA,
+            double kStatic,
+            double kP,
             double a,
             double b,
             double c,
             double d
     ) {
-        this.kp = kp;
-        this.ki = ki;
-        this.kd = kd;
-        this.kf = kf;
-        this.hK = hK;
-        this.hMax = hMax;
-        this.hMin = hMin;
+        this.kV = kV;
+        this.kA = kA;
+        this.kStatic = kStatic;
+        this.kP = kP;
         this.a = a;
         this.b = b;
         this.c = c;
@@ -58,4 +52,16 @@ public class ShooterConfig {
         this.shooter = shooter;
     }
 
+    public void setV(double kV){
+        this.kV = kV;
+    }
+    public void setA(double kA){
+        this.kA = kA;
+    }
+    public void setS(double kStatic){
+        this.kStatic = kStatic;
+    }
+    public void setP(double kP){
+        this.kP = kP;
+    }
 }
