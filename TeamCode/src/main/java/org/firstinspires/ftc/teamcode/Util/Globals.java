@@ -5,8 +5,9 @@ import org.firstinspires.ftc.teamcode.Enums.Alliance;
 
 @Configurable
 public class Globals {
-
-   public static int TARGET_VEL = 1400;
+    public static int TILTED_HIVE;
+    public static int STAND_HIVE;
+    public static int TARGET_VEL = 1400;
     public static final double MAX_VEL = 1240;
     public static final double MIN_VEL = 1140;
     public static int INTAKE_DIRECTION = 1;
@@ -19,7 +20,6 @@ public class Globals {
     public static double BLUE_HIVE_Y = 81;
     public static Pose POSE_HIVE = new Pose(BLUE_HIVE_X, BLUE_HIVE_Y);
     public static Pose POSE_ROBOT = new Pose(START_X, START_Y, Math.toRadians(START_H));
-
     public static double RED_HIVE_X = 57;
 
     //+28
@@ -45,10 +45,10 @@ public class Globals {
     public static final double INTERCEPT =  795.0935;
 
     public static ShooterConfig POLLEN_SHOOTER = new ShooterConfig(
-            null, -0.0030, 0.001, 0.00001, 0, HOOD_POLLEN_START, HOOD_POLLEN_SHOOTING, 0.005, 0, 0, 0, 0
+            null, -0.0030, 0.001, 0.00001, 0, 0, 0, 0, 0
     );
     public static ShooterConfig NECTAR_SHOOTER = new ShooterConfig(
-            null, -0.25, 0.001, 0, 0.05, HOOD_NECTAR_SHOOTING, HOOD_NECTAR_START, 0.005, 0, 0, 0, 0
+            null, -0.033, 0, 0.0015, 0.0008, 0, 0, 0, 0
     );
     public static Alliance alliance = Alliance.BLUE;
     public void setAlliance(Alliance a) {
